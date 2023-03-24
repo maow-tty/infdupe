@@ -1,0 +1,13 @@
+{
+  "item_group.infdupe.tab": "Infinite Duplication",
+  "block.infdupe.duplicator": "Duplicator",
+  "item.infdupe.duplicator.lore": "Unleash economical havock!",
+  "block.infdupe.deletor": "Deletor",
+  "item.infdupe.deletor.lore": "Defies the law of conservation of mass",
+  "item.infdupe.ritual_iron": "Ritual Iron",
+  "item.infdupe.ritual_iron.lore": "Lack of possession not guaranteed",
+  "item.infdupe.creation_sigil": "Creation Sigil",
+  "item.infdupe.deletion_sigil": "Deletion Sigil",
+  "item.infdupe.book_of_resistance": "Book of Resistance",
+  "item.infdupe.book_of_resistance.lore": "Resets the player's damage multiplier"
+}

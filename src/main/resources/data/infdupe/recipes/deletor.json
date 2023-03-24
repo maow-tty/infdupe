@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "RRR",
+    "RSR",
+    "RRR"
+  ],
+  "key": {
+    "R": { "item": "infdupe:ritual_iron" },
+    "S": { "item": "infdupe:deletion_sigil" }
+  },
+  "result": {
+    "item": "infdupe:deletor",
+    "count": 1
+  }
+}

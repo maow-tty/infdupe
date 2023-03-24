@@ -1,0 +1,25 @@
+{
+  "display": {
+    "icon": {
+      "item": "infdupe:deletor"
+    },
+    "title": { "text": "Inventory Management" },
+    "description": {
+      "text": "Acquire a Deletor",
+      "color": "green"
+    }
+  },
+  "parent": "infdupe:root",
+  "criteria": {
+    "craft": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["infdupe:deletor"]
+          }
+        ]
+      }
+    }
+  }
+}

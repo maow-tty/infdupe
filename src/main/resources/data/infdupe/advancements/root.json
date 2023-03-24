@@ -1,0 +1,17 @@
+{
+  "display": {
+    "icon": {
+      "item": "infdupe:duplicator"
+    },
+    "title": { "text": "Infinite Duplication" },
+    "description": {
+      "text": "No more balancing!",
+      "color": "green"
+    }
+  },
+  "criteria": {
+    "dummy": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}

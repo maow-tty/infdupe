@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    { "item": "minecraft:iron_ingot" },
+    { "item": "minecraft:obsidian" },
+    { "item": "minecraft:fire_charge" }
+  ],
+  "result": {
+    "item": "infdupe:ritual_iron",
+    "count": 1
+  }
+}

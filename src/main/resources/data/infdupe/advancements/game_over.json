@@ -1,0 +1,25 @@
+{
+  "display": {
+    "icon": {
+      "item": "infdupe:duplicator"
+    },
+    "title": { "text": "Game Over" },
+    "description": {
+      "text": "Acquire a Duplicator",
+      "color": "green"
+    }
+  },
+  "parent": "infdupe:root",
+  "criteria": {
+    "craft": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["infdupe:duplicator"]
+          }
+        ]
+      }
+    }
+  }
+}
