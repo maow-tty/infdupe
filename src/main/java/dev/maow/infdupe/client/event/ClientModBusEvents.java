@@ -10,8 +10,8 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 
 @Mod.EventBusSubscriber(modid = InfiniteDuplication.MODID, bus = Bus.MOD, value = Dist.CLIENT)
-public final class ClientModEvents {
-    private ClientModEvents() {}
+public final class ClientModBusEvents {
+    private ClientModBusEvents() {}
 
     @SubscribeEvent
     public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {

@@ -15,7 +15,6 @@ import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
 
@@ -37,17 +36,17 @@ public final class DeletorBlock extends Block {
                                           @NotNull BlockHitResult result) {
         final var inventory = player.getInventory();
         final var item = player.getItemInHand(hand);
-        if (!level.isClientSide()) {
-            if (!item.isEmpty()) {
+        if (!item.isEmpty()) {
+            if (!level.isClientSide()) {
                 inventory.removeItem(item);
-            }
-        } else {
-            for (int i = 0; i < 5; i++) {
-                level.addParticle(ParticleTypes.SMOKE,
-                    pos.getX() + 0.5, pos.getY() + i, pos.getZ() + 0.5,
-                    0.0, 0.5, 0.0
-                );
-                level.playSound(player, pos, SoundEvents.LAVA_EXTINGUISH, SoundSource.BLOCKS, 0.25F, 1.0F);
+            } else {
+                for (int i = 0; i < 5; i++) {
+                    level.addParticle(ParticleTypes.SMOKE,
+                        pos.getX() + 0.5, pos.getY() + i, pos.getZ() + 0.5,
+                        0.0, 0.5, 0.0
+                    );
+                    level.playSound(player, pos, SoundEvents.LAVA_EXTINGUISH, SoundSource.BLOCKS, 0.25F, 1.0F);
+                }
             }
         }
         return InteractionResult.SUCCESS;
