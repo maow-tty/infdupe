@@ -38,8 +38,10 @@ public final class DeletorBlock extends Block {
         final var item = player.getItemInHand(hand);
         if (!item.isEmpty()) {
             if (!level.isClientSide()) {
+                // Remove the item on the logical server
                 inventory.removeItem(item);
             } else {
+                // Display particles and play sounds on the logical client
                 for (int i = 0; i < 5; i++) {
                     level.addParticle(ParticleTypes.SMOKE,
                         pos.getX() + 0.5, pos.getY() + i, pos.getZ() + 0.5,

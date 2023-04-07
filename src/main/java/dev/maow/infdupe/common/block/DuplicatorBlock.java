@@ -1,14 +1,17 @@
 package dev.maow.infdupe.common.block;
 
 import dev.maow.infdupe.InfiniteDuplication;
-import dev.maow.infdupe.api.capability.DamageMultiplier;
 import dev.maow.infdupe.common.block.entity.DuplicatorBlockEntity;
+import dev.maow.infdupe.util.Lazy;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -24,9 +27,15 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Set;
+
 @SuppressWarnings("deprecation")
 public final class DuplicatorBlock extends Block implements EntityBlock {
-    private static final float ADDED_DAMAGE = 0.003125F;
+    private static final Lazy<Set<Item>> BLACKLIST = new Lazy<>(() -> Set.of(
+        InfiniteDuplication.Items.BOOK_OF_RESISTANCE.get(),
+        InfiniteDuplication.Items.DUPLICATOR.get(),
+        InfiniteDuplication.Items.DELETOR.get()
+    ));
 
     public DuplicatorBlock() {
         super(
@@ -36,7 +45,10 @@ public final class DuplicatorBlock extends Block implements EntityBlock {
         );
     }
 
-    // TODO: MAKE THIS NOT UGLY AS FUCK
+    private static boolean isBlacklisted(ItemStack stack) {
+        return BLACKLIST.get().contains(stack.getItem());
+    }
+
     @Override
     public @NotNull InteractionResult use(@NotNull BlockState state,
                                           @NotNull Level level,
@@ -44,42 +56,40 @@ public final class DuplicatorBlock extends Block implements EntityBlock {
                                           @NotNull Player player,
                                           @NotNull InteractionHand hand,
                                           @NotNull BlockHitResult result) {
-        final var inventory = player.getInventory();
+        final var stack = player.getItemInHand(hand);
         final var entity = (DuplicatorBlockEntity) level.getBlockEntity(pos);
-        final var item = player.getItemInHand(hand);
+        if (entity == null) return InteractionResult.FAIL;
 
-        if (item.is(InfiniteDuplication.Items.BOOK_OF_RESISTANCE.get())) {
+        if (isBlacklisted(stack)) {
             return InteractionResult.FAIL;
-        }
-
-        final var shouldSet = !item.isEmpty() && !item.sameItem(entity.getTargetItem());
-        if (!level.isClientSide()) {
-            if (shouldSet) {
-                entity.setTargetItem(item.copyWithCount(1), level);
-            } else if (!entity.isEmpty()) {
-                final var capability = player.getCapability(DamageMultiplier.CAPABILITY);
-                final var targetItem = entity.getTargetItem();
-                final var crouched = player.isCrouching();
-
-                inventory.add(targetItem.copyWithCount(
-                    crouched
-                        ? targetItem.getMaxStackSize()
-                        : 1
-                ));
-
-                if (!player.isCreative()) {
-                    capability.ifPresent(multiplier ->
-                        multiplier.addValue(
-                            crouched
-                                ? ADDED_DAMAGE * 64
-                                : ADDED_DAMAGE
-                        ));
-                }
-            }
-        } else if (shouldSet) {
-            level.playSound(player, pos, SoundEvents.ARMOR_EQUIP_GENERIC, SoundSource.BLOCKS, 0.25F, 1.0F);
+        } else if (!entity.matchesTargetItem(stack) && !stack.isEmpty()) {
+            // Set target item to the one in the player's hand as long as they don't match
+            setItem(player, pos, entity, stack, level);
+        } else if (!entity.isEmpty()) {
+            // Acquire target item if it isn't empty. Crouching gives you the max stack size of that item.
+            acquireItem(player, entity, level);
         }
         return InteractionResult.SUCCESS;
+    }
+
+    private void setItem(Player player, BlockPos pos, DuplicatorBlockEntity entity, ItemStack stack, Level level) {
+        if (!level.isClientSide()) {
+            entity.setTargetItem(stack.copyWithCount(1), level);
+        } else {
+            level.playSound(player, pos, SoundEvents.ARMOR_EQUIP_GENERIC, SoundSource.BLOCKS, 0.25F, 1.0F);
+        }
+    }
+
+    private void acquireItem(Player player, DuplicatorBlockEntity entity, Level level) {
+        if (!level.isClientSide()) {
+            final var targetItem = entity.getTargetItem();
+
+            player.getInventory().add(targetItem.copyWithCount(
+                player.isCrouching()
+                    ? targetItem.getMaxStackSize()
+                    : 1
+            ));
+        }
     }
 
     @Override

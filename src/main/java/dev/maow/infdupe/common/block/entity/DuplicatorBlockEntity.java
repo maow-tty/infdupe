@@ -1,6 +1,7 @@
 package dev.maow.infdupe.common.block.entity;
 
 import dev.maow.infdupe.InfiniteDuplication;
+import dev.maow.infdupe.util.ItemUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
@@ -50,6 +51,10 @@ public final class DuplicatorBlockEntity extends BlockEntity {
         this.targetItem = targetItem;
         final var state = getBlockState();
         level.sendBlockUpdated(getBlockPos(), state, state, Block.UPDATE_CLIENTS);
+    }
+
+    public boolean matchesTargetItem(ItemStack stack) {
+        return ItemUtils.compare(stack, targetItem);
     }
 
     public boolean isEmpty() {
