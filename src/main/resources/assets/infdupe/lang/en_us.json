@@ -7,7 +7,5 @@
   "item.infdupe.ritual_iron": "Ritual Iron",
   "item.infdupe.ritual_iron.lore": "Lack of possession not guaranteed",
   "item.infdupe.creation_sigil": "Creation Sigil",
-  "item.infdupe.deletion_sigil": "Deletion Sigil",
-  "item.infdupe.book_of_resistance": "Book of Resistance",
-  "item.infdupe.book_of_resistance.lore": "Resets the player's damage multiplier"
+  "item.infdupe.deletion_sigil": "Deletion Sigil"
 }

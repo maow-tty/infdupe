@@ -3,7 +3,6 @@ package dev.maow.infdupe;
 import dev.maow.infdupe.common.block.DeletorBlock;
 import dev.maow.infdupe.common.block.DuplicatorBlock;
 import dev.maow.infdupe.common.block.entity.DuplicatorBlockEntity;
-import dev.maow.infdupe.common.item.BookOfResistanceItem;
 import dev.maow.infdupe.common.item.LoredBlockItem;
 import dev.maow.infdupe.common.item.LoredItem;
 import net.minecraft.ChatFormatting;
@@ -99,7 +98,6 @@ public class InfiniteDuplication {
         );
         public static final RegistryObject<Item> CREATION_SIGIL = registerPlain("creation_sigil");
         public static final RegistryObject<Item> DELETION_SIGIL = registerPlain("deletion_sigil");
-        public static final RegistryObject<Item> BOOK_OF_RESISTANCE = REGISTER.register("book_of_resistance", BookOfResistanceItem::new);
 
         private Items() {}
 

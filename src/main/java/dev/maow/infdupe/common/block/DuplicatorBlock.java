@@ -32,7 +32,6 @@ import java.util.Set;
 @SuppressWarnings("deprecation")
 public final class DuplicatorBlock extends Block implements EntityBlock {
     private static final Lazy<Set<Item>> BLACKLIST = new Lazy<>(() -> Set.of(
-        InfiniteDuplication.Items.BOOK_OF_RESISTANCE.get(),
         InfiniteDuplication.Items.DUPLICATOR.get(),
         InfiniteDuplication.Items.DELETOR.get()
     ));
