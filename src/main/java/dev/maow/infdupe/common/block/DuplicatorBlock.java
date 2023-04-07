@@ -1,6 +1,6 @@
 package dev.maow.infdupe.common.block;
 
-import dev.maow.infdupe.InfiniteDuplicationItems;
+import dev.maow.infdupe.InfiniteDuplication;
 import dev.maow.infdupe.api.capability.DamageMultiplier;
 import dev.maow.infdupe.common.block.entity.DuplicatorBlockEntity;
 import net.minecraft.core.BlockPos;
@@ -36,6 +36,7 @@ public final class DuplicatorBlock extends Block implements EntityBlock {
         );
     }
 
+    // TODO: MAKE THIS NOT UGLY AS FUCK
     @Override
     public @NotNull InteractionResult use(@NotNull BlockState state,
                                           @NotNull Level level,
@@ -47,7 +48,7 @@ public final class DuplicatorBlock extends Block implements EntityBlock {
         final var entity = (DuplicatorBlockEntity) level.getBlockEntity(pos);
         final var item = player.getItemInHand(hand);
 
-        if (item.is(InfiniteDuplicationItems.BOOK_OF_RESISTANCE.get())) {
+        if (item.is(InfiniteDuplication.Items.BOOK_OF_RESISTANCE.get())) {
             return InteractionResult.FAIL;
         }
 

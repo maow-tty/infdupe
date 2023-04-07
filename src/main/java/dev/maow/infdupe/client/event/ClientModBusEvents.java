@@ -1,7 +1,6 @@
 package dev.maow.infdupe.client.event;
 
 import dev.maow.infdupe.InfiniteDuplication;
-import dev.maow.infdupe.InfiniteDuplicationBlocks;
 import dev.maow.infdupe.client.render.block.DuplicatorBlockEntityRenderer;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
@@ -15,6 +14,9 @@ public final class ClientModBusEvents {
 
     @SubscribeEvent
     public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
-        event.registerBlockEntityRenderer(InfiniteDuplicationBlocks.DUPLICATOR_ENTITY.get(), DuplicatorBlockEntityRenderer::new);
+        event.registerBlockEntityRenderer(
+            InfiniteDuplication.BlockEntities.DUPLICATOR.get(),
+            DuplicatorBlockEntityRenderer::new
+        );
     }
 }

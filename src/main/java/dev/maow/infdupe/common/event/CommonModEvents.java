@@ -1,6 +1,6 @@
 package dev.maow.infdupe.common.event;
 
-import dev.maow.infdupe.InfiniteDuplicationItems;
+import dev.maow.infdupe.InfiniteDuplication;
 import dev.maow.infdupe.api.capability.DamageMultiplier;
 import dev.maow.infdupe.common.capability.BasicDamageMultiplier;
 import net.minecraft.core.Direction;
@@ -90,7 +90,7 @@ public final class CommonModEvents {
     public static void itemUse(PlayerInteractEvent.RightClickItem event) {
         final var player = event.getEntity();
         final var item = event.getItemStack();
-        if (player != null && item.is(InfiniteDuplicationItems.BOOK_OF_RESISTANCE.get())) {
+        if (player != null && item.is(InfiniteDuplication.Items.BOOK_OF_RESISTANCE.get())) {
             final var inventory = player.getInventory();
             player
                 .getCapability(DamageMultiplier.CAPABILITY)

@@ -1,6 +1,6 @@
 package dev.maow.infdupe.common.block.entity;
 
-import dev.maow.infdupe.InfiniteDuplicationBlocks;
+import dev.maow.infdupe.InfiniteDuplication;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
@@ -17,7 +17,7 @@ public final class DuplicatorBlockEntity extends BlockEntity {
     private ItemStack targetItem = ItemStack.EMPTY;
 
     public DuplicatorBlockEntity(BlockPos pos, BlockState state) {
-        super(InfiniteDuplicationBlocks.DUPLICATOR_ENTITY.get(), pos, state);
+        super(InfiniteDuplication.BlockEntities.DUPLICATOR.get(), pos, state);
     }
 
     @Override
